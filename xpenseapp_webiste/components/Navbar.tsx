@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
@@ -19,6 +19,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState("Features");
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -35,6 +36,8 @@ export function Navbar() {
     else if (pathname === "/about") setActiveTab("About");
     else if (pathname === "/contact") setActiveTab("Contact");
     else if (pathname === "/") setActiveTab("Features"); // Default for home
+    
+    setIsMobileMenuOpen(false); // Close menu on route change
   }, [pathname]);
 
   return (
@@ -96,8 +99,52 @@ export function Navbar() {
           >
             Get Started
           </a>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-full text-ink-600 dark:text-ink-300 hover:bg-ink-200/50 dark:hover:bg-ink-800/50 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-4 right-4 mt-2 p-4 bg-white/95 dark:bg-ink-900/95 backdrop-blur-xl border border-ink-200/50 dark:border-ink-700/50 rounded-2xl shadow-xl flex flex-col gap-2 md:hidden"
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => {
+                  setActiveTab(item.name);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                  activeTab === item.name
+                    ? "bg-ink-100 dark:bg-ink-800 text-ink-950 dark:text-white"
+                    : "text-ink-600 dark:text-ink-300 hover:bg-ink-50 dark:hover:bg-ink-800/50 hover:text-ink-900 dark:hover:text-ink-100"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <a
+              href="#"
+              className="mt-2 flex items-center justify-center px-4 py-3 text-base font-bold rounded-xl bg-brand-500 text-white shadow-glow hover:bg-brand-600 transition-all active:scale-95 sm:hidden"
+            >
+              Get Started
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
