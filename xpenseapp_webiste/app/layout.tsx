@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "XpenseSnap",
     images: [
       {
-        url: "https://xpensesnap.com/og-image.jpg", // Make sure to upload an og-image.jpg to your public folder!
+        url: "https://xpensesnap.com/og-image.webp", // Make sure to upload an og-image.jpg to your public folder!
         width: 1200,
         height: 630,
         alt: "XpenseSnap Preview",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "XpenseSnap | The smartest way to track expenses",
     description: "Point your camera, split the bill, set budgets, and visualize your money. Powered by lightning-fast OCR.",
-    images: ["https://xpensesnap.com/og-image.jpg"],
+    images: ["https://xpensesnap.com/og-image.webp"],
   },
   alternates: {
     canonical: "https://xpensesnap.com",
