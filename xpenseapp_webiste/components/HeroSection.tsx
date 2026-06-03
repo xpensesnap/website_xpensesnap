@@ -56,7 +56,7 @@ export function HeroSection() {
         className="absolute inset-0 z-0 pointer-events-none"
       >
         <div
-          className="absolute inset-0 bg-no-repeat  bg-cover bg-center opacity- dark:opacity-90"
+          className="absolute inset-0 bg-no-repeat bg-cover bg-[position:75%_center] md:bg-center dark:opacity-90"
           style={{ backgroundImage: 'url("/front_image2.webp")' }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink-50/90 via-ink-50/50 to-transparent dark:from-[#050505] dark:via-[#050505]/60 dark:to-transparent" />
