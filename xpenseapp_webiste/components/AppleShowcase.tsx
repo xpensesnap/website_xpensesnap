@@ -134,9 +134,9 @@ export function AppleShowcase() {
 
         <div className="absolute inset-0 grid-bg opacity-50 dark:opacity-20 [mask-image:radial-gradient(ellipse_at_center,#000_25%,transparent_75%)] pointer-events-none" />
 
-        <div className="relative container-x w-full grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center">
+        <div className="relative container-x w-full flex flex-col lg:grid lg:grid-cols-[1.05fr_1fr] gap-4 sm:gap-10 items-center justify-center h-full py-6 lg:py-0">
           {/* Left column: scene text */}
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:order-1 w-full z-20">
             <SceneIndicator active={active} total={SCENES.length} progress={t} />
 
             <AnimatePresence mode="wait">
@@ -146,18 +146,18 @@ export function AppleShowcase() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
                 transition={{ duration: 0.55, ease: [0.2, 0.7, 0.2, 1] }}
-                className="mt-6"
               >
-                <div className={`inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br ${scene.accent} items-center justify-center shadow-xl`}>
-                  <scene.icon className="w-7 h-7 text-white" />
+                <div className="mt-4" />
+                <div className={`inline-flex w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${scene.accent} items-center justify-center shadow-xl`}>
+                  <scene.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                 </div>
-                <div className="mt-5 font-mono text-xs tracking-[0.3em] text-brand-600 dark:text-brand-400">
+                <div className="mt-3 sm:mt-5 font-mono text-[10px] sm:text-xs tracking-[0.3em] text-brand-600 dark:text-brand-400">
                   {scene.eyebrow}
                 </div>
-                <h2 className="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 dark:text-white leading-[1.02] whitespace-pre-line">
+                <h2 className="mt-2 sm:mt-3 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-950 dark:text-white leading-[1.05] sm:leading-[1.02] whitespace-pre-line">
                   {scene.title}
                 </h2>
-                <p className="mt-6 text-lg text-ink-600 dark:text-neutral-400 leading-relaxed max-w-xl">
+                <p className="mt-3 sm:mt-6 text-sm sm:text-lg text-ink-600 dark:text-neutral-400 leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none">
                   {scene.body}
                 </p>
               </motion.div>
@@ -165,7 +165,7 @@ export function AppleShowcase() {
           </div>
 
           {/* Right column: pinned phone with 3D scroll transforms */}
-          <div className="order-1 lg:order-2 flex justify-center" style={{ perspective: 1400 }}>
+          <div className="order-1 lg:order-2 flex justify-center w-full mt-4 lg:mt-0" style={{ perspective: 1400 }}>
             <motion.div
               style={{
                 scale,
@@ -205,8 +205,8 @@ function SceneIndicator({ active, total, progress }: { active: number; total: nu
 
 function PhoneFrame({ scene }: { scene: Scene }) {
   return (
-    <div className="relative w-[300px] sm:w-[340px] aspect-[9/19] rounded-[3rem] bg-gradient-to-b from-ink-800 to-ink-950 p-2.5 shadow-[0_30px_120px_-30px_rgba(0,0,0,0.6)] border border-ink-800">
-      <div className="absolute inset-0 rounded-[3rem] pointer-events-none">
+    <div className="relative w-[230px] sm:w-[340px] aspect-[9/19] rounded-[2.5rem] sm:rounded-[3rem] bg-gradient-to-b from-ink-800 to-ink-950 p-2 sm:p-2.5 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.6)] sm:shadow-[0_30px_120px_-30px_rgba(0,0,0,0.6)] border border-ink-800">
+      <div className="absolute inset-0 rounded-[2.5rem] sm:rounded-[3rem] pointer-events-none">
         <div className="absolute top-0 left-1/4 right-1/4 h-12 bg-gradient-to-b from-white/10 to-transparent rounded-b-full" />
       </div>
 
@@ -215,7 +215,7 @@ function PhoneFrame({ scene }: { scene: Scene }) {
         <div className="w-12 h-1.5 rounded-full bg-ink-800" />
       </div>
 
-      <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-brand-50 via-white to-sky-50 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
+      <div className="relative w-full h-full rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-brand-50 via-white to-sky-50 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
         <AnimatePresence mode="wait">
           <motion.div
             key={scene.key}
